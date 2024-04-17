@@ -7,8 +7,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #333; /* Cor de fundo cinza */
-    color: white; /* Letras e números brancos */
+    background-color: #f2f2f2;
 }
 
 .container {
@@ -17,7 +16,8 @@ body {
 }
 
 #timer {
-    font-size: 60px;
+    font-size: 180px; /* 3x maior */
+    color: #333;
     margin-bottom: 20px;
 }
 
@@ -47,14 +47,14 @@ body {
 
 #options {
     display: none;
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #555; /* Cor de fundo cinza mais escura */
+    transform: translateX(-50%);
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .option {
