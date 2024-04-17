@@ -174,9 +174,10 @@
     const percentage = ((totalSeconds) / (0)) * 360;
     progressFill.style.transform = `rotate(${percentage}deg)`;
     if (totalSeconds > 0) {
-      progressFill.style.backgroundColor = 'yellow';
+      const fillPercentage = 100 - (totalSeconds / 60) * 100;
+      progressFill.style.background = `conic-gradient(yellow ${fillPercentage}%, #444444 ${fillPercentage}% 100%)`;
     } else {
-      progressFill.style.backgroundColor = '#444444';
+      progressFill.style.background = '#444444';
     }
   }
   
