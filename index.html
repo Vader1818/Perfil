@@ -3,64 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cronômetro Tecnológico</title>
+<title>Cronômetro</title>
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #333333;
+    background-color: #222222; /* Cor de fundo */
+    color: #ffffff; /* Cor dos números e letras */
+    text-align: center;
 }
 
 .container {
-    text-align: center;
-    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Altura total da tela */
 }
 
 #timer {
-    font-size: 180px; /* 3x maior */
-    color: #ffffff;
+    font-size: 5vw; /* Tamanho dos números */
     margin-bottom: 20px;
 }
 
 .buttons {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .button {
-    background-color: #ccc;
+    background-color: #cccccc; /* Cor dos botões */
     border: none;
-    color: #333;
+    color: #222222; /* Cor do texto dos botões */
     padding: 15px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    border-radius: 20px;
-    cursor: pointer;
     margin: 0 10px;
-    font-weight: bold;
+    font-size: 3vw; /* Tamanho do texto dos botões */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .button:hover {
-    background-color: #999;
-    color: white;
+    background-color: #aaaaaa; /* Cor de fundo ao passar o mouse */
 }
 
-#options {
+.options-container {
     display: none;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
+    transform: translate(-50%, -50%);
+    background-color: #666666; /* Cor de fundo da janela de opções */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .option {
-    padding: 10px 0;
+    margin: 10px;
 }
 
+.option button {
+    background-color: #cccccc; /* Cor dos botões de opção */
+    border: none;
+    color: #222222; /* Cor do texto dos botões de opção */
+    padding: 10px 20px;
+    font-size: 2vw; /* Tamanho do texto dos botões de opção */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option button:hover {
+    background-color: #aaaaaa; /* Cor de fundo ao passar o mouse nos botões de opção */
+}
 </style>
 </head>
 <body>
@@ -70,24 +86,16 @@ body {
     <div class="buttons">
         <button class="button" id="startBtn">Iniciar</button>
         <button class="button" id="resetBtn">Zerar</button>
-        <button class="button" id="optionsBtn">Opções</button>
+        <button class="button" id="optionsBtn">Tempo</button>
     </div>
-    <div id="options">
+    <div id="optionsContainer" class="options-container">
         <div class="option">
-            <input type="radio" id="1min" name="countdown" value="60">
-            <label for="1min">1 Minuto</label>
+            <button id="btn1min">1 Minuto</button>
+            <button id="btn5min">5 Minutos</button>
         </div>
         <div class="option">
-            <input type="radio" id="2min" name="countdown" value="120">
-            <label for="2min">2 Minutos</label>
-        </div>
-        <div class="option">
-            <input type="radio" id="5min" name="countdown" value="300">
-            <label for="5min">5 Minutos</label>
-        </div>
-        <div class="option">
-            <input type="radio" id="10min" name="countdown" value="600">
-            <label for="10min">10 Minutos</label>
+            <button id="btn10min">10 Minutos</button>
+            <button id="btn1hour">1 Hora</button>
         </div>
     </div>
 </div>
@@ -97,8 +105,7 @@ const timerDisplay = document.getElementById('timer');
 const startBtn = document.getElementById('startBtn');
 const resetBtn = document.getElementById('resetBtn');
 const optionsBtn = document.getElementById('optionsBtn');
-const options = document.getElementById('options');
-const countdownInputs = document.querySelectorAll('input[name="countdown"]');
+const optionsContainer = document.getElementById('optionsContainer');
 
 let countdownInterval;
 let countdownSeconds = 0;
@@ -141,18 +148,38 @@ resetBtn.addEventListener('click', resetCountdown);
 optionsBtn.addEventListener('click', toggleOptions);
 
 function toggleOptions() {
-    options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    if (optionsContainer.style.display === 'none') {
+        optionsContainer.style.display = 'block';
+    } else {
+        optionsContainer.style.display = 'none';
+    }
 }
 
-countdownInputs.forEach(input => {
-    input.addEventListener('change', function() {
-        countdownSeconds = parseInt(this.value);
-        updateDisplay();
-        options.style.display = 'none'; // Fecha as opções após selecionar o tempo
-    });
+document.getElementById('btn1min').addEventListener('click', function() {
+    countdownSeconds = 60;
+    updateDisplay();
+    optionsContainer.style.display = 'none';
+});
+
+document.getElementById('btn5min').addEventListener('click', function() {
+    countdownSeconds = 300;
+    updateDisplay();
+    optionsContainer.style.display = 'none';
+});
+
+document.getElementById('btn10min').addEventListener('click', function() {
+    countdownSeconds = 600;
+    updateDisplay();
+    optionsContainer.style.display = 'none';
+});
+
+document.getElementById('btn1hour').addEventListener('click', function() {
+    countdownSeconds = 3600;
+    updateDisplay();
+    optionsContainer.style.display = 'none';
 });
 
 </script>
 
 </body>
-</html>
+</
