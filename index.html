@@ -58,8 +58,8 @@
   
   .progress-circle-wrapper {
     position: relative;
-    width: 100px; /* Tornando o anel 2x menor */
-    height: 100px; /* Tornando o anel 2x menor */
+    width: 100px;
+    height: 100px;
     margin-top: 20px;
     overflow: hidden;
     z-index: 1;
@@ -67,11 +67,11 @@
   
   .progress-circle {
     position: absolute;
-    width: 200%; /* Tornando o anel 2x menor */
-    height: 200%; /* Tornando o anel 2x menor */
+    width: 200%;
+    height: 200%;
     border-radius: 50%;
-    border: 10px solid transparent; /* Tornando a cor transparente */
-    border-top-color: #444444; /* Definindo a cor do anel */
+    border: 10px solid transparent; 
+    border-top-color: #444444;
     clip-path: circle(50% at center);
     transform: rotate(-90deg);
     transition: transform 2s linear;
@@ -186,7 +186,7 @@
     progressFill.style.transform = `rotate(${percentage}deg)`;
     if (totalSeconds > 0) {
       const fillPercentage = (totalSeconds / 10) * 100;
-      progressFill.style.background = `conic-gradient(yellow ${fillPercentage}%, #444444 ${fillPercentage}% 100%)`;
+      progressFill.style.background = `conic-gradient(#333333, blue)`;
     } else {
       progressFill.style.background = '#444444';
     }
