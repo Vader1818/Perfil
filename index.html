@@ -69,6 +69,8 @@
     border-radius: 50%;
     background: conic-gradient(#444444 0%, #444444 45%, blue 45%, blue 100%);
     clip-path: circle(50% at center);
+    transform: rotate(-90deg);
+    transition: transform 1s linear;
   }
   
   .progress-fill {
@@ -99,7 +101,7 @@
   
   <div class="progress-circle-wrapper">
     <div class="progress-circle"></div>
-    <div class="progress-fill" style="transform: rotate(-90deg);"></div>
+    <div class="progress-fill"></div>
   </div>
 </div>
 
@@ -115,7 +117,18 @@
   let totalSeconds = 10 * 60;
   
   function startTimer() {
-    timer = setInterval(updateTimer, 1000);
+    let startTime = Date.now();
+    timer = setInterval(() => {
+      const elapsedTime = Date.now() - startTime;
+      totalSeconds = Math.max(totalSeconds - Math.floor(elapsedTime / 1000), 0);
+      updateDisplay();
+      updateProgress();
+      if (totalSeconds === 0) {
+        clearInterval(timer);
+        notify();
+      }
+      startTime = Date.now();
+    }, 1000);
     startButton.textContent = 'Pausar';
     startButton.removeEventListener('click', startTimer);
     startButton.addEventListener('click', pauseTimer);
@@ -132,20 +145,10 @@
     clearInterval(timer);
     totalSeconds = 10 * 60;
     updateDisplay();
-    progressFill.style.transform = 'rotate(-90deg)';
+    updateProgress();
     startButton.textContent = 'Iniciar';
     startButton.removeEventListener('click', pauseTimer);
     startButton.addEventListener('click', startTimer);
-  }
-  
-  function updateTimer() {
-    totalSeconds--;
-    if (totalSeconds === 0) {
-      clearInterval(timer);
-      notify();
-    }
-    updateDisplay();
-    updateProgress();
   }
   
   function updateDisplay() {
@@ -170,7 +173,7 @@
   
   function updateProgress() {
     const percentage = ((10 * 60 - totalSeconds) / (10 * 60)) * 360;
-    progressFill.style.transform = `rotate(${90 - percentage}deg)`;
+    progressFill.style.transform = `rotate(${percentage}deg)`;
   }
   
   startButton.addEventListener('click', startTimer);
