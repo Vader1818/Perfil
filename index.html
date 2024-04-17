@@ -7,7 +7,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #2F3438;
+    background-color: #333333;
 }
 
 .container {
@@ -16,8 +16,8 @@ body {
 }
 
 #timer {
-    font-size: 60px;
-    color: #FFFFFF;
+    font-size: 180px; /* 3x maior */
+    color: #333;
     margin-bottom: 20px;
 }
 
@@ -69,7 +69,6 @@ body {
     <div id="timer">00:00:00</div>
     <div class="buttons">
         <button class="button" id="startBtn">Iniciar</button>
-        <button class="button" id="pauseBtn">Pausar</button>
         <button class="button" id="resetBtn">Zerar</button>
         <button class="button" id="optionsBtn">Opções</button>
     </div>
@@ -96,7 +95,6 @@ body {
 <script>
 const timerDisplay = document.getElementById('timer');
 const startBtn = document.getElementById('startBtn');
-const pauseBtn = document.getElementById('pauseBtn');
 const resetBtn = document.getElementById('resetBtn');
 const optionsBtn = document.getElementById('optionsBtn');
 const options = document.getElementById('options');
@@ -108,11 +106,6 @@ let countdownSeconds = 0;
 function startCountdown() {
     countdownInterval = setInterval(updateCountdown, 1000);
     startBtn.disabled = true;
-}
-
-function pauseCountdown() {
-    clearInterval(countdownInterval);
-    startBtn.disabled = false;
 }
 
 function resetCountdown() {
@@ -144,7 +137,6 @@ function pad(number) {
 }
 
 startBtn.addEventListener('click', startCountdown);
-pauseBtn.addEventListener('click', pauseCountdown);
 resetBtn.addEventListener('click', resetCountdown);
 optionsBtn.addEventListener('click', toggleOptions);
 
