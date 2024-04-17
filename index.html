@@ -59,6 +59,7 @@
     width: 200px;
     height: 200px;
     margin-top: 20px;
+    overflow: hidden;
   }
   
   .progress-circle {
@@ -66,7 +67,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #444444;
+    background: conic-gradient(#444444 0%, #444444 45%, blue 45%, blue 100%);
     clip-path: circle(50% at center);
   }
   
@@ -75,16 +76,18 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: blue;
-    clip-path: circle(50% at center);
-    transition: width 1s linear;
+    background-color: transparent;
+    clip-path: circle(45% at center);
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+    transition: transform 1s linear;
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div id="timer">00:00</div>
+  <div id="timer">30:00</div>
   <button id="start" class="button">Iniciar</button>
   <button id="reset" class="button">Zerar</button>
   <button id="optionsBtn" class="button">Opções</button>
@@ -96,7 +99,7 @@
   
   <div class="progress-circle-wrapper">
     <div class="progress-circle"></div>
-    <div class="progress-fill" style="width: 0;"></div>
+    <div class="progress-fill" style="transform: rotate(-90deg);"></div>
   </div>
 </div>
 
@@ -129,7 +132,7 @@
     clearInterval(timer);
     totalSeconds = 30 * 60;
     updateDisplay();
-    progressFill.style.width = '0';
+    progressFill.style.transform = 'rotate(-90deg)';
     startButton.textContent = 'Iniciar';
     startButton.removeEventListener('click', pauseTimer);
     startButton.addEventListener('click', startTimer);
@@ -166,8 +169,8 @@
   }
   
   function updateProgress() {
-    const percentage = ((30 * 60 - totalSeconds) / (30 * 60)) * 100;
-    progressFill.style.width = `${percentage}%`;
+    const percentage = ((30 * 60 - totalSeconds) / (30 * 60)) * 360;
+    progressFill.style.transform = `rotate(${90 - percentage}deg)`;
   }
   
   startButton.addEventListener('click', startTimer);
