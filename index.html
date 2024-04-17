@@ -23,6 +23,8 @@
   
   #timer {
     font-size: 3em;
+    position: relative;
+    z-index: 2;
   }
   
   .button {
@@ -56,18 +58,19 @@
   
   .progress-circle-wrapper {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100px; /* Tornando o anel 2x menor */
+    height: 100px; /* Tornando o anel 2x menor */
     margin-top: 20px;
     overflow: hidden;
+    z-index: 1;
   }
   
   .progress-circle {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 200%; /* Tornando o anel 2x menor */
+    height: 200%; /* Tornando o anel 2x menor */
     border-radius: 50%;
-    border: 15px solid transparent; /* Tornando a cor transparente */
+    border: 10px solid transparent; /* Tornando a cor transparente */
     border-top-color: #444444; /* Definindo a cor do anel */
     clip-path: circle(50% at center);
     transform: rotate(-90deg);
