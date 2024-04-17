@@ -70,6 +70,7 @@
     background: conic-gradient(#444444 0%, #444444 45%, transparent 45%, transparent 100%);
     clip-path: circle(50% at center);
     transform: rotate(-90deg);
+    transition: transform 2s linear;
   }
   
   .progress-fill {
@@ -171,10 +172,15 @@
   }
   
   function updateProgress() {
-    const percentage = ((totalSeconds) / (0)) * 360;
+    let percentage;
+    if (totalSeconds <= 30) {
+      percentage = ((totalSeconds) / 30) * 180;
+    } else {
+      percentage = 180 + ((totalSeconds - 30) / 30) * 180;
+    }
     progressFill.style.transform = `rotate(${percentage}deg)`;
     if (totalSeconds > 0) {
-      const fillPercentage = 100 - (totalSeconds / 60) * 100;
+      const fillPercentage = (totalSeconds / 60) * 100;
       progressFill.style.background = `conic-gradient(yellow ${fillPercentage}%, #444444 ${fillPercentage}% 100%)`;
     } else {
       progressFill.style.background = '#444444';
