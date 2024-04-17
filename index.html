@@ -89,7 +89,7 @@
 <body>
 
 <div class="container">
-  <div id="timer">10:00</div>
+  <div id="timer">00:00</div>
   <button id="start" class="button">Iniciar</button>
   <button id="reset" class="button">Zerar</button>
   <button id="optionsBtn" class="button">Opções</button>
@@ -114,7 +114,7 @@
   const progressFill = document.querySelector('.progress-fill');
   
   let timer;
-  let totalSeconds = 10 * 60;
+  let totalSeconds = 0;
   
   function startTimer() {
     let startTime = Date.now();
@@ -143,7 +143,7 @@
   
   function resetTimer() {
     clearInterval(timer);
-    totalSeconds = 10 * 60;
+    totalSeconds = 0;
     updateDisplay();
     updateProgress();
     startButton.textContent = 'Iniciar';
@@ -172,7 +172,7 @@
   }
   
   function updateProgress() {
-    const percentage = ((10 * 60 - totalSeconds) / (10 * 60)) * 360;
+    const percentage = ((0 - totalSeconds) / (0)) * 360;
     progressFill.style.transform = `rotate(${percentage}deg)`;
   }
   
