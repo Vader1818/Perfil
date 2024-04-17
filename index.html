@@ -7,7 +7,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #2F3438;
+    background-color: #f2f2f2;
 }
 
 .container {
@@ -16,7 +16,7 @@ body {
 }
 
 #timer {
-    font-size: 40px;
+    font-size: 60px;
     color: #333;
     margin-bottom: 20px;
 }
@@ -29,14 +29,15 @@ body {
     background-color: #ccc;
     border: none;
     color: #333;
-    padding: 10px 20px;
+    padding: 15px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 20px;
     cursor: pointer;
     margin: 0 10px;
+    font-weight: bold;
 }
 
 .button:hover {
@@ -46,6 +47,14 @@ body {
 
 #options {
     display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .option {
@@ -147,6 +156,7 @@ countdownInputs.forEach(input => {
     input.addEventListener('change', function() {
         countdownSeconds = parseInt(this.value);
         updateDisplay();
+        options.style.display = 'none'; // Fecha as opções após selecionar o tempo
     });
 });
 
