@@ -57,14 +57,14 @@
 <body>
 
 <div class="container">
-  <div id="timer">00:00</div>
+  <div id="timer">30:00</div>
   <button id="start" class="button">Iniciar</button>
   <button id="reset" class="button">Zerar</button>
   <button id="optionsBtn" class="button">Opções</button>
   <div id="options">
-    <div class="option">1 minuto</div>
-    <div class="option">10 minutos</div>
-    <div class="option">1 hora</div>
+    <div class="option" data-time="60">1 minuto</div>
+    <div class="option" data-time="600">10 minutos</div>
+    <div class="option" data-time="3600">1 hora</div>
   </div>
 </div>
 
@@ -76,8 +76,7 @@
   const optionsMenu = document.getElementById('options');
   
   let timer;
-  let seconds = 0;
-  let minutes = 0;
+  let totalSeconds = 30 * 60;
   
   function startTimer() {
     timer = setInterval(updateTimer, 1000);
@@ -95,8 +94,7 @@
   
   function resetTimer() {
     clearInterval(timer);
-    seconds = 0;
-    minutes = 0;
+    totalSeconds = 30 * 60;
     updateDisplay();
     startButton.textContent = 'Iniciar';
     startButton.removeEventListener('click', pauseTimer);
@@ -104,18 +102,32 @@
   }
   
   function updateTimer() {
-    seconds++;
-    if (seconds === 60) {
-      minutes++;
-      seconds = 0;
+    totalSeconds--;
+    if (totalSeconds === 0) {
+      clearInterval(timer);
+      notify();
     }
     updateDisplay();
   }
   
   function updateDisplay() {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
     const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
     const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
     timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
+  }
+  
+  function notify() {
+    if (Notification.permission === "granted") {
+      new Notification("Tempo esgotado!");
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          new Notification("Tempo esgotado!");
+        }
+      });
+    }
   }
   
   startButton.addEventListener('click', startTimer);
@@ -123,6 +135,16 @@
   
   optionsButton.addEventListener('click', () => {
     optionsMenu.style.display = optionsMenu.style.display === 'none' ? 'block' : 'none';
+  });
+  
+  const optionButtons = document.querySelectorAll('.option');
+  optionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const time = parseInt(button.dataset.time);
+      totalSeconds = time;
+      updateDisplay();
+      optionsMenu.style.display = 'none';
+    });
   });
 </script>
 
