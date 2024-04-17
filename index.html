@@ -7,7 +7,8 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: #333;
+    background-color: #333; /* Cor de fundo cinza */
+    color: white; /* Letras e números brancos */
 }
 
 .container {
@@ -16,8 +17,7 @@ body {
 }
 
 #timer {
-    font-size: 180px; /* 3x maior */
-    color: #ffffff;
+    font-size: 60px;
     margin-bottom: 20px;
 }
 
@@ -47,14 +47,14 @@ body {
 
 #options {
     display: none;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
+    transform: translate(-50%, -50%);
+    background-color: #555; /* Cor de fundo cinza mais escura */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .option {
