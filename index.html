@@ -94,6 +94,7 @@
   <button id="reset" class="button">Zerar</button>
   <button id="optionsBtn" class="button">Opções</button>
   <div id="options">
+    <div class="option" data-time="10">10 segundos</div>
     <div class="option" data-time="60">1 minuto</div>
     <div class="option" data-time="600">10 minutos</div>
     <div class="option" data-time="3600">1 hora</div>
@@ -173,14 +174,14 @@
   
   function updateProgress() {
     let percentage;
-    if (totalSeconds <= 30) {
-      percentage = ((totalSeconds) / 30) * 180;
+    if (totalSeconds <= 5) {
+      percentage = ((totalSeconds) / 5) * 180;
     } else {
-      percentage = 180 + ((totalSeconds - 30) / 30) * 180;
+      percentage = 180 + ((totalSeconds - 5) / 5) * 180;
     }
     progressFill.style.transform = `rotate(${percentage}deg)`;
     if (totalSeconds > 0) {
-      const fillPercentage = (totalSeconds / 60) * 100;
+      const fillPercentage = (totalSeconds / 10) * 100;
       progressFill.style.background = `conic-gradient(yellow ${fillPercentage}%, #444444 ${fillPercentage}% 100%)`;
     } else {
       progressFill.style.background = '#444444';
