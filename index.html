@@ -8,10 +8,11 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f0f0f0;
         }
         #perfil {
             width: 200px;
-            margin: 0 auto;
+            margin: 50px auto;
         }
         #foto {
             width: 150px;
@@ -22,16 +23,17 @@
         input[type="file"] {
             display: none;
         }
-        .botao {
-            background-color: #007bff;
+        .botao-trocar {
+            background-color: #777;
             color: #fff;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            border-radius: 20px; /* Cantos mais arredondados */
         }
-        .botao:hover {
-            background-color: #0056b3;
+        .botao-trocar:hover {
+            background-color: #999; /* Cor um pouco mais clara quando hover */
         }
     </style>
 </head>
@@ -40,7 +42,7 @@
 <div id="perfil">
     <img id="foto" src="default.jpg" alt="Foto de Perfil">
     <br>
-    <label for="selecionar-foto" class="botao">Selecionar Foto</label>
+    <label for="selecionar-foto" class="botao-trocar">Trocar Foto</label>
     <input type="file" id="selecionar-foto" accept="image/*" onchange="mostrarFoto(this)">
 </div>
 
