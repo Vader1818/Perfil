@@ -1,18 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relógio Digital</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronômetro Tecnológico</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#timer {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: #ccc;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.button:hover {
+    background-color: #999;
+    color: white;
+}
+
+#options {
+    display: none;
+}
+
+.option {
+    padding: 10px 0;
+}
+
+</style>
 </head>
 <body>
 
 <div class="container">
-    <div id="relogio" class="relogio">00:00:00</div>
+    <div id="timer">00:00:00</div>
+    <div class="buttons">
+        <button class="button" id="startBtn">Iniciar</button>
+        <button class="button" id="pauseBtn">Pausar</button>
+        <button class="button" id="resetBtn">Zerar</button>
+        <button class="button" id="optionsBtn">Opções</button>
+    </div>
+    <div id="options">
+        <div class="option">
+            <input type="radio" id="1min" name="countdown" value="60">
+            <label for="1min">1 Minuto</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="2min" name="countdown" value="120">
+            <label for="2min">2 Minutos</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="5min" name="countdown" value="300">
+            <label for="5min">5 Minutos</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="10min" name="countdown" value="600">
+            <label for="10min">10 Minutos</label>
+        </div>
+    </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+const timerDisplay = document.getElementById('timer');
+const startBtn = document.getElementById('startBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const resetBtn = document.getElementById('resetBtn');
+const optionsBtn = document.getElementById('optionsBtn');
+const options = document.getElementById('options');
+const countdownInputs = document.querySelectorAll('input[name="countdown"]');
+
+let countdownInterval;
+let countdownSeconds = 0;
+
+function startCountdown() {
+    countdownInterval = setInterval(updateCountdown, 1000);
+    startBtn.disabled = true;
+}
+
+function pauseCountdown() {
+    clearInterval(countdownInterval);
+    startBtn.disabled = false;
+}
+
+function resetCountdown() {
+    clearInterval(countdownInterval);
+    countdownSeconds = 0;
+    updateDisplay();
+    startBtn.disabled = false;
+}
+
+function updateCountdown() {
+    countdownSeconds--;
+    if (countdownSeconds <= 0) {
+        clearInterval(countdownInterval);
+        alert('Contagem concluída!');
+        startBtn.disabled = false;
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const hours = Math.floor(countdownSeconds / 3600);
+    const minutes = Math.floor((countdownSeconds % 3600) / 60);
+    const seconds = countdownSeconds % 60;
+    timerDisplay.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
+function pad(number) {
+    return (number < 10) ? '0' + number : number;
+}
+
+startBtn.addEventListener('click', startCountdown);
+pauseBtn.addEventListener('click', pauseCountdown);
+resetBtn.addEventListener('click', resetCountdown);
+optionsBtn.addEventListener('click', toggleOptions);
+
+function toggleOptions() {
+    options.style.display = options.style.display === 'none' ? 'block' : 'none';
+}
+
+countdownInputs.forEach(input => {
+    input.addEventListener('change', function() {
+        countdownSeconds = parseInt(this.value);
+        updateDisplay();
+    });
+});
+
+</script>
 
 </body>
 </html>
