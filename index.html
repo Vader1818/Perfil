@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/styles/style.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <title>Stopwatch</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relógio de São Paulo</title>
+<style>
+  body {
+    background-color: #151515;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #relogio {
+    font-size: 8vw; /* Ajustando o tamanho do texto de acordo com a largura da janela */
+  }
+</style>
 </head>
 <body>
-    <div id="stopwatch">
+<div id="relogio"></div>
 
-        <h2 id="timer">00:00:00:00</h2>
+<script>
+function atualizarHoras() {
+  var agora = new Date();
+  var hora = agora.getHours().toString().padStart(2, '0');
+  var minuto = agora.getMinutes().toString().padStart(2, '0');
 
-        <div id="actions">
-            <button id="reset">
-                <i class="fa-solid fa-redo"></i> 
-            </button>
-            <button id="power" action="start">
-                <i class="fa-solid fa-play"></i>
-            </button>
-            <button id="mark">
-                <i class="fa-solid fa-flag"></i>
-            </button>
-        </div>
+  document.getElementById('relogio').innerHTML = hora + ':' + minuto;
+}
 
-        <div id="marks-list"></div>
-    </div>
-    <script src="src/javascript/script.js"></script>
+// Atualiza o relógio a cada minuto
+setInterval(atualizarHoras, 60000);
+
+// Atualiza o relógio imediatamente ao carregar a página
+atualizarHoras();
+</script>
 </body>
 </html>
