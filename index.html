@@ -3,65 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relógio de São Paulo</title>
+<title>Relógio de Brasília</title>
 <style>
   body {
-    background-color: #0E0E0E;
+    background-color: #151515;
     color: white;
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
-  #relogio {
-    font-size: 10vh; /* Tamanho do texto ajustado de acordo com a altura da janela */
-    max-width: 90%; /* Garantindo que o relógio não ultrapasse a largura máxima */
-    margin-bottom: 20px;
-    background-color: #0E0E0E; /* Cor de fundo do relógio */
-    padding: 10px; /* Adicionando espaço interno ao relógio */
+  .clock-container {
+    width: 100%;
+    max-width: 400px; /* Defina a largura máxima desejada */
+    margin: 0 auto;
   }
-  #botao-zoom {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 16px; /* Tamanho 3x menor */
-    height: 16px; /* Tamanho 3x menor */
-    background-color: #0E0E0E; /* Cor do fundo do relógio */
-    border: none;
-    cursor: pointer;
+  .clock-widget {
+    width: 100%;
   }
 </style>
 </head>
 <body>
-<div id="relogio"></div>
-<button id="botao-zoom" onclick="aumentarZoom()"></button>
+<div class="clock-container">
+  <div class="clock-widget" id="tw_22_1099280889"></div>
+</div>
 
-<script>
-function atualizarHoras() {
-  var agora = new Date();
-  var hora = agora.getHours().toString().padStart(2, '0');
-  var minuto = agora.getMinutes().toString().padStart(2, '0');
-
-  document.getElementById('relogio').innerHTML = hora + ':' + minuto;
-}
-
-// Atualiza o relógio a cada minuto
-setInterval(atualizarHoras, 60000);
-
-// Atualiza o relógio imediatamente ao carregar a página
-atualizarHoras();
-
-// Função para aumentar o zoom do relógio
-function aumentarZoom() {
-  var relogio = document.getElementById('relogio');
-  var tamanhoAtual = parseFloat(window.getComputedStyle(relogio).fontSize);
-  relogio.style.fontSize = (tamanhoAtual * 1.2) + 'px';
-}
+<script type="text/javascript"> 
+  var css_file=document.createElement("link"); 
+  css_file.setAttribute("rel","stylesheet"); 
+  css_file.setAttribute("type","text/css"); 
+  css_file.setAttribute("href","https://s.bookcdn.com//css/cl/bw-cl-c22.css?v=0.0.1"); 
+  document.getElementsByTagName("head")[0].appendChild(css_file); 
+</script> 
+<script type="text/javascript"> 
+  function setWidgetData_1099280889(data){ 
+    if(typeof(data) != 'undefined' && data.results.length > 0) { 
+      for(var i = 0; i < data.results.length; ++i) { 
+        var objMainBlock = ''; 
+        var params = data.results[i]; 
+        objMainBlock = document.getElementById('tw_'+params.widget_type+'_'+params.widget_id); 
+        if(objMainBlock !== null) objMainBlock.innerHTML = params.html_code; 
+      } 
+    } 
+  } 
+  var clock_timer_1099280889 = -1; 
+  widgetSrc = "https://widgets.booked.net/time/info?ver=2;domid=209;type=22;id=1099280889;scode=;city_id=;wlangid=1;mode=1;details=0;background=ffffff;border_color=ffffff;color=686868;add_background=ffffff;add_color=333333;head_color=ffffff;border=0;transparent=0"; 
+  var widgetUrl = location.href; 
+  widgetSrc += '&ref=' + widgetUrl; 
+  var wstrackId = ""; 
+  if (wstrackId) { 
+    widgetSrc += ';wstrackId=' + wstrackId + ';' 
+  } 
+  var timeBookedScript = document.createElement("script"); 
+  timeBookedScript.setAttribute("type", "text/javascript"); 
+  timeBookedScript.src = widgetSrc; 
+  document.body.appendChild(timeBookedScript); 
 </script>
 </body>
 </html>
